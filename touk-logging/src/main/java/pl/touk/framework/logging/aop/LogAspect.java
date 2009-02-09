@@ -40,7 +40,7 @@ public class LogAspect {
      * Logs entrance to annotated method.
      * @param joinPoint JoinPoint automatically filled by aspectj
      */
-	@Before(value = "@annotation(pl.touk.ewka.core.logging.aop.LogMethodEntranceInfo)")
+	@Before(value = "@annotation(pl.touk.framework.logging.aop.LogMethodEntranceInfo)")
 	public void logMethodEntranceInfo(JoinPoint joinPoint) {
 		Log log = getLogGetter().getLog(joinPoint);
 
@@ -58,7 +58,7 @@ public class LogAspect {
      * Logs exit from annotated method.
      * @param joinPoint JoinPoint automatically filled by aspectj
      */
-	@After(value = "@annotation(pl.touk.ewka.core.logging.aop.LogMethodExitInfo)")
+	@After(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)")
 	public void logMethodExitInfo(JoinPoint joinPoint) {
 		Log log = getLogGetter().getLog(joinPoint);
 
@@ -75,7 +75,7 @@ public class LogAspect {
      * Requires a logged in user
      * @param joinPoint JoinPoint automatically filled by aspectj
      */
-    @After(value = "@annotation(pl.touk.ewka.core.logging.aop.LogBusinessOperationInfo)")
+    @After(value = "@annotation(pl.touk.framework.logging.aop.LogBusinessOperationInfo)")
     public void logBusinessOperationExitInfo(JoinPoint joinPoint) {
         this.logBusinessMessage(joinPoint, true);
     }
@@ -85,7 +85,7 @@ public class LogAspect {
      * Requires a logged in user
      * @param joinPoint JoinPoint automatically filled by aspectj
      */
-    @AfterThrowing(value = "@annotation(pl.touk.ewka.core.logging.aop.LogBusinessOperationInfo)")
+    @AfterThrowing(value = "@annotation(pl.touk.framework.logging.aop.LogBusinessOperationInfo)")
     public void logBusinessOperationErrorInfo(JoinPoint joinPoint) {
             this.logBusinessMessage(joinPoint, false);
     }
