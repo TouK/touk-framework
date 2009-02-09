@@ -41,9 +41,9 @@
 
 
     <scm>
-        <connection>scm:svn:https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.1</connection>
-        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.1</developerConnection>
-        <url>https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.1</url>
+        <connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</connection>
+        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</developerConnection>
+        <url>https://top.touk.pl/svn/toukframework/trunk</url>
     </scm>
 
     <modules>
