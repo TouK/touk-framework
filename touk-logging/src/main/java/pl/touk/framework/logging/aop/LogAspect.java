@@ -46,8 +46,11 @@ public class LogAspect {
 
 		if (log.isInfoEnabled()) {
 			log.info("entering: " + joinPoint.getSignature().getName());
+
+            String argStringValue;
 			for (Object arg : joinPoint.getArgs()) {
-				log.info("   w/arg: " + arg.toString());
+                argStringValue = (arg == null) ? "NULL" : arg.toString();
+				log.info("   w/arg: " + argStringValue);
 			}
 			log.info("      at: " + joinPoint.getSourceLocation().getWithinType());
 		}
