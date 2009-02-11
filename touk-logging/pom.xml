@@ -32,6 +32,7 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 		</dependency>
+
         <dependency>
           <groupId>log4j</groupId>
           <artifactId>log4j</artifactId>
@@ -39,14 +40,15 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-        </dependency>        
-        <dependency>
-            <groupId>pl.touk</groupId>
-            <artifactId>wonderful-security-lib</artifactId>            
         </dependency>
         <dependency>
             <groupId>pl.touk</groupId>
             <artifactId>touk-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.touk</groupId>
+            <artifactId>touk-security</artifactId>
             <version>${project.version}</version>
         </dependency>
 

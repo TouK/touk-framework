@@ -49,6 +49,7 @@
     <modules>
         <module>touk-logging</module>
         <module>touk-util</module>
+        <module>touk-security</module>
     </modules>
 
     <profiles>
@@ -78,6 +79,11 @@
 
     <dependencyManagement>
         <dependencies>
+           <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>2.0.4</version>
+           </dependency>           
 	       <dependency>
 	            <groupId>org.springframework</groupId>
 	            <artifactId>spring-aop</artifactId>
@@ -108,11 +114,14 @@
 	          <artifactId>log4j</artifactId>
 	          <version>1.2.15</version>
 	        </dependency>
+
+            <!--
 	        <dependency>
 	            <groupId>pl.touk</groupId>
 	            <artifactId>wonderful-security-lib</artifactId>
 	            <version>1.0.1</version>
 	        </dependency>
+	        -->
 		
 			<!-- testing -->
 			<dependency>

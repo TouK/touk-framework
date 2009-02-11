@@ -6,10 +6,10 @@ import org.aspectj.lang.Signature;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
+import org.springframework.security.userdetails.UserDetails;
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
 import pl.touk.framework.logging.messages.BusinessMessage;
-import pl.touk.wonderfulsecurity.beans.WsecUser;
-import pl.touk.wonderfulsecurity.core.IServerSecurityContext;
+import pl.touk.security.context.SecurityContextInterface;
 
 /**
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
@@ -22,13 +22,11 @@ public class LogAspectTest {
 
         Mockery mockery = new Mockery();
 
-        final IServerSecurityContext securityContext = mockery.mock(IServerSecurityContext.class);
+        final SecurityContextInterface securityContext = mockery.mock(SecurityContextInterface.class);
+        final UserDetails user = mockery.mock(UserDetails.class);
+        final String testName = "testName";        
 
-        final WsecUser user = new WsecUser();
-        String testName = "testName";
-        user.setFullName(testName);
-
-        logAspect.setServerSecurityContext(securityContext);
+        logAspect.setSecurityContext(securityContext);
 
         final String businessLogCategory = "businessLog";
         final JoinPoint joinPoint = mockery.mock(JoinPoint.class);
@@ -47,6 +45,7 @@ public class LogAspectTest {
         final BusinessMessage expectedMessage = new BusinessMessage(testName, operationName, data, true);
 
         mockery.checking(new Expectations() {{
+            allowing(user).getUsername(); will(returnValue(testName));
             allowing(securityContext).getLoggedInUser(); will(returnValue(user));
 
             allowing(logGetter).getLog(businessLogCategory); will(returnValue(log));
@@ -72,14 +71,12 @@ public class LogAspectTest {
                 LogAspect logAspect = new LogAspect();
 
         Mockery mockery = new Mockery();
+        
+        final SecurityContextInterface securityContext = mockery.mock(SecurityContextInterface.class);
+        final UserDetails user = mockery.mock(UserDetails.class);
+        final String testName = "testName";
 
-        final IServerSecurityContext securityContext = mockery.mock(IServerSecurityContext.class);
-
-        final WsecUser user = new WsecUser();
-        String testName = "testName";
-        user.setFullName(testName);
-
-        logAspect.setServerSecurityContext(securityContext);
+        logAspect.setSecurityContext(securityContext);
 
         final String businessLogCategory = "businessLog";
         final JoinPoint joinPoint = mockery.mock(JoinPoint.class);
@@ -99,6 +96,7 @@ public class LogAspectTest {
 
         mockery.checking(new Expectations() {{
             allowing(securityContext).getLoggedInUser(); will(returnValue(user));
+            allowing(user).getUsername(); will(returnValue(testName));
 
             allowing(logGetter).getLog(businessLogCategory); will(returnValue(log));
             allowing(log).isInfoEnabled(); will(returnValue(true));

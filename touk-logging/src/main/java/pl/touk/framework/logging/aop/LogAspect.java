@@ -10,10 +10,10 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.security.userdetails.UserDetails;
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
 import pl.touk.framework.logging.messages.BusinessMessage;
-import pl.touk.wonderfulsecurity.beans.WsecUser;
-import pl.touk.wonderfulsecurity.core.IServerSecurityContext;
+import pl.touk.security.context.SecurityContextInterface;
 
 /**
  * Aspect (in AOP sense) responsible for logging.
@@ -25,7 +25,7 @@ import pl.touk.wonderfulsecurity.core.IServerSecurityContext;
 //TODO: log security context information if available
 @Aspect
 public class LogAspect {
-    protected IServerSecurityContext serverSecurityContext;
+    protected SecurityContextInterface securityContext;    
     protected PointcutLogGetterInterface logGetter;
 
     /**
@@ -99,7 +99,7 @@ public class LogAspect {
         Log log = getLogGetter().getLog(this.getBusinessLogCategory());
 
         if (log.isInfoEnabled()) {
-            WsecUser user = this.getServerSecurityContext().getLoggedInUser();
+            UserDetails user = this.getSecurityContext().getLoggedInUser();
             if(user == null) {
                 throw new SecurityException("User not logged in. Logged user required for method " + joinPoint.getSignature().getName());
             }
@@ -113,19 +113,19 @@ public class LogAspect {
                 }
             }
 
-            BusinessMessage message = new BusinessMessage(user.getFullName(), joinPoint.getSignature().getName(), data.toString(), result);
+            BusinessMessage message = new BusinessMessage(user.getUsername(), joinPoint.getSignature().getName(), data.toString(), result);
             log.info(message);
         }
     }
 
     //setters and getters
 
-    protected IServerSecurityContext getServerSecurityContext() {
-        return serverSecurityContext;
+    protected SecurityContextInterface getSecurityContext() {
+        return securityContext;
     }
 
-    public void setServerSecurityContext(IServerSecurityContext serverSecurityContext) {
-        this.serverSecurityContext = serverSecurityContext;
+    public void setSecurityContext(SecurityContextInterface securityContext) {
+        this.securityContext = securityContext;
     }
 
     protected PointcutLogGetterInterface getLogGetter() {
