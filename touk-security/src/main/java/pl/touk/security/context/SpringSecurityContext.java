@@ -24,4 +24,8 @@ public class SpringSecurityContext implements SecurityContextInterface {
         
         return (UserDetails)user;
     }
+
+    public String getLoggedUserName() {
+        return this.getLoggedInUser().getUsername();
+    }
 }
