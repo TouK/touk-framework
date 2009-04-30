@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 
+ * Interface with operations for converting domain objects to DTOs.
  * @author  Ula Trzaskowska
  */
 public interface DTOConverter {
