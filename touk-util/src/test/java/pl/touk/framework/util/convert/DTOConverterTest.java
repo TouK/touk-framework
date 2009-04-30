@@ -5,17 +5,12 @@
 
 package pl.touk.framework.util.convert;
 
-import org.junit.Test;
-import org.junit.Assert;
-import org.junit.Before;
-
-import java.util.List;
 import java.util.ArrayList;
-/*
- * TODO: ADD SHORT DESCRIPTION 
- *
- * @author <a href="mailto:jkr@touk.pl">Jakub Kurlenda</a>
- */
+import java.util.List;
+
+import org.dozer.DozerBeanMapper;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class DTOConverterTest {
 
@@ -30,10 +25,12 @@ public class DTOConverterTest {
 
     @Test
     public void testConvert() {
+        DTOConverter dtoConverter = new DTODozerConverter(new DozerBeanMapper());
+        
         DummyDTO dto = new DummyDTO("xxx", true, 77, 18);
         dto.setList(createDummyCollection());
 
-        DummyClass dummyClass = DTOConverter.convert(dto, DummyClass.class);
+        DummyClass dummyClass = dtoConverter.convert(dto, DummyClass.class);
         Assert.assertNotNull(dummyClass);
 
         Assert.assertEquals(dummyClass.getAaa(), dto.getAaa(), 0);
@@ -49,9 +46,11 @@ public class DTOConverterTest {
 
     @Test
     public void testCollectionCopy() {
+        DTOConverter dtoConverter = new DTODozerConverter(new DozerBeanMapper());
+        
         List<DummyClass> dummyClasses = createDummyCollection();
 
-        List<DummyDTO> dummyDTOs = DTOConverter.convert(dummyClasses, DummyDTO.class);
+        List<DummyDTO> dummyDTOs = dtoConverter.convert(dummyClasses, DummyDTO.class);
 
         Assert.assertEquals(dummyClasses.size(), dummyDTOs.size());
     }
