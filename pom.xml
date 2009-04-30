@@ -7,7 +7,7 @@
     <description>TouK Open Framework</description>
     <url>Url</url>
 
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.5</version>
 
     <parent>
         <groupId>pl.touk</groupId>
@@ -51,9 +51,9 @@
 
 
     <scm>
-        <connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</connection>
-        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</developerConnection>
-        <url>https://top.touk.pl/svn/toukframework/trunk</url>
+        <connection>scm:svn:https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.5</connection>
+        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.5</developerConnection>
+        <url>https://top.touk.pl/svn/toukframework/tags/touk-framework-1.0.5</url>
     </scm>
 
     <modules>
