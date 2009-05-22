@@ -12,6 +12,17 @@ import org.springframework.security.context.SecurityContextHolder;
  */
 public class SpringSecurityContext implements SecurityContextInterface {
     public UserDetails getLoggedInUser() {
+        //call outside of operating security context
+        //not exactly bad, but possible during hibernate bootstrap.
+        //@see org.hibernate.engine.UnsavedValueFactory.getUnsavedIdentifierValue;
+        if ( null == SecurityContextHolder.getContext() ) { 
+            return null;
+        }
+
+        if ( null == SecurityContextHolder.getContext().getAuthentication() ) {
+            return null;
+        }
+
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if(user == null) {
@@ -26,6 +37,11 @@ public class SpringSecurityContext implements SecurityContextInterface {
     }
 
     public String getLoggedUserName() {
-        return this.getLoggedInUser().getUsername();
+        UserDetails userDetails = this.getLoggedInUser();
+
+        if(null == userDetails)
+            return null;
+        else
+            return userDetails.getUsername();
     }
 }
