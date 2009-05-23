@@ -1,10 +1,12 @@
 /*
- * Copyright (c) 2009 TouK
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
+
 package pl.touk.framework.logging.renderers;
 
-import org.apache.log4j.or.*;
+import org.apache.log4j.or.ObjectRenderer;
+
 import pl.touk.framework.logging.messages.BusinessMessage;
 
 /**

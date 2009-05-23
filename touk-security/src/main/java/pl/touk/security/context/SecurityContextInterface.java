@@ -1,3 +1,8 @@
+/*
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
+ * All rights reserved
+ */
+
 package pl.touk.security.context;
 
 import org.springframework.security.userdetails.UserDetails;

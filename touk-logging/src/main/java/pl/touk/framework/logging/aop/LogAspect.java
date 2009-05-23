@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2009 TouK
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
+
 package pl.touk.framework.logging.aop;
 
 import org.apache.commons.logging.Log;
@@ -21,11 +22,12 @@ import pl.touk.security.context.SecurityContextInterface;
  *
  * @author witek wolejszo
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
+ * TODO: log security context information if available
  */
-//TODO: log security context information if available
 @Aspect
 public class LogAspect {
-    protected SecurityContextInterface securityContext;    
+
+    protected SecurityContextInterface securityContext;
     protected PointcutLogGetterInterface logGetter;
 
     /**

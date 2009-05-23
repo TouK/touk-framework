@@ -5,7 +5,7 @@
 package pl.touk.framework.util.contract;
 
 /**
- * Uset to validate method's input/output (Design By Contract style: http://en.wikipedia.org/wiki/Design_by_contract).
+ * Used to validate method's input/output (Design By Contract style: http://en.wikipedia.org/wiki/Design_by_contract).
  * Use as a static import and validate as in the example             
  * <code>mustBeNotNull(mustBeNotEmpty(user), mustBeNotEmpty(operation), mustBeNotEmpty(data), result)</code>
  *
@@ -13,8 +13,10 @@ package pl.touk.framework.util.contract;
  * so we can chain invocations.
  * 
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
+ * @deprecated Please use jakarta commons lang Validator
  */
 //THINK: should we throw a custom exception (ContractValidationException)? Maybe only in case we have no standard exception for the situation?
+@Deprecated
 public class ContractValidator {
 
     /**

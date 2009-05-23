@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2009 TouK
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
+
 package pl.touk.framework.logging.messages;
 
 import static pl.touk.framework.util.contract.ContractValidator.mustBeNotEmpty;
@@ -46,7 +47,8 @@ public class BusinessMessage {
      * @param isFinishedWithoutErrors Whether business operation resulted finished without errors
      */
     public BusinessMessage( String user, String operation, String data, Boolean isFinishedWithoutErrors) {
-        mustBeNotNull(mustBeNotEmpty(user), mustBeNotEmpty(operation), mustBeNotEmpty(data), isFinishedWithoutErrors);
+
+    	mustBeNotNull(mustBeNotEmpty(user), mustBeNotEmpty(operation), mustBeNotEmpty(data), isFinishedWithoutErrors);
 
         this.user = user;
         this.operation = operation;

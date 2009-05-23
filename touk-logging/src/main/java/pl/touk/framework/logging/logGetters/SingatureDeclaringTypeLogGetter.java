@@ -1,14 +1,15 @@
 /*
- * Copyright (c) 2009 TouK
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
+
 package pl.touk.framework.logging.logGetters;
 
 import org.apache.commons.logging.Log;
 import org.aspectj.lang.JoinPoint;
 
 /**
- * LogGetter that returns a Log object for an advised method
+ * LogGetter that returns a Log object for an advised method.
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 public class SingatureDeclaringTypeLogGetter implements PointcutLogGetterInterface {
