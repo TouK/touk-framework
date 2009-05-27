@@ -45,6 +45,15 @@ public class DTOConverterTest {
     }
 
     @Test
+    public void testConvertWithNullSource() {
+        DTOConverter dtoConverter = new DTODozerConverter(new DozerBeanMapper());
+
+        DummyClass dummyClass = dtoConverter.convert(null, new DummyClass());
+
+        Assert.assertNull(dummyClass);
+    }
+
+    @Test
     public void testCollectionCopy() {
         DTOConverter dtoConverter = new DTODozerConverter(new DozerBeanMapper());
         

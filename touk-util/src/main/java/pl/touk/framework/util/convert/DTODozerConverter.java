@@ -34,13 +34,17 @@ public class DTODozerConverter implements DTOConverter {
      * Converts source domain object into desired destination DTO class instance.
      *
      * @param sourceObject - domain class to convert
-     * @param destination class - desired class name
+     * @param destinationClass - desired class name
      *
      * @return instance of destinationClass, mapped with source object properties.
      */
 
     public <FROM, TO> TO convert(FROM sourceObject, java.lang.Class<TO> destinationClass) {
-        return beanMapper.map(sourceObject, destinationClass);
+        if(sourceObject == null) {
+            return null;
+        } else {
+            return beanMapper.map(sourceObject, destinationClass);
+        }
     }
 
     /**
@@ -54,14 +58,18 @@ public class DTODozerConverter implements DTOConverter {
 
     @SuppressWarnings("unchecked")
     public <FROM extends Collection, TO> List<TO> convert(FROM sourceObjects, java.lang.Class<TO> destinationClass) {
-        List<TO> returnedList = new ArrayList<TO>();
+        if(sourceObjects == null) {
+            return null;
+        } else {
+            List<TO> returnedList = new ArrayList<TO>();
 
-        for (Object sourceObject : sourceObjects) {
-            TO destinationDTO = beanMapper.map(sourceObject, destinationClass);
-            returnedList.add(destinationDTO);
+            for (Object sourceObject : sourceObjects) {
+                TO destinationDTO = beanMapper.map(sourceObject, destinationClass);
+                returnedList.add(destinationDTO);
+            }
+
+            return returnedList;
         }
-
-        return returnedList;
     }
 
     /**
@@ -74,8 +82,12 @@ public class DTODozerConverter implements DTOConverter {
      */
 
     public <FROM, TO> TO convert(FROM sourceObject, TO destinationObject) {
-        beanMapper.map(sourceObject, destinationObject);
-        return destinationObject;
+        if(sourceObject == null) {
+            return null;
+        } else {
+            beanMapper.map(sourceObject, destinationObject);
+            return destinationObject;
+        }
     }
 
     public void setBeanMapper(Mapper beanMapper) {
