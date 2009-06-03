@@ -6,6 +6,13 @@
     <packaging>jar</packaging>
     <version>1.2-SNAPSHOT</version>
     <name>weblogic-logging</name>
+
+	<parent>
+		<groupId>pl.touk</groupId>
+		<artifactId>top</artifactId>
+		<version>1.0.1</version>
+	</parent>
+
     <!--
     <parent>
         <groupId>pl.touk</groupId>
