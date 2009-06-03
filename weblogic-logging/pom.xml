@@ -6,11 +6,20 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>weblogic-logging</name>
+
     <parent>
         <groupId>pl.touk</groupId>
         <artifactId>top</artifactId>
         <version>1.0.1</version>
     </parent>
+
+    <!--
+    <parent>
+        <groupId>pl.touk</groupId>
+        <artifactId>touk-framework</artifactId>
+        <version>1.0.7-SNAPSHOT</version>
+    </parent>
+    -->
     <build>
         <finalName>wl-log-config</finalName>
     </build>
@@ -96,11 +105,4 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-    <scm>
-		<connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</connection>
-		<developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</developerConnection>
-		<url>https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</url>
-	</scm>
-
 </project>
