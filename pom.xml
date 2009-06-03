@@ -6,6 +6,13 @@
     <packaging>jar</packaging>
     <version>1.0</version>
     <name>weblogic-logging</name>
+
+    <parent>
+        <groupId>pl.touk</groupId>
+        <artifactId>top</artifactId>
+        <version>1.0.1</version>
+    </parent>
+
     <!--
     <parent>
         <groupId>pl.touk</groupId>
@@ -74,4 +81,34 @@
         </dependency>
         -->
     </dependencies>
+    <repositories>
+		<repository>
+			<id>top.release</id>
+			<name>TouK Open source repository with release</name>
+			<url>http://top.touk.pl/maven2/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>top.snapshot</id>
+			<name>TouK Open source repository with snapshots</name>
+			<url>http://top.touk.pl/maven2/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+  <scm>
+    <connection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</connection>
+    <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</developerConnection>
+    <url>https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</url>
+  </scm>
 </project>
