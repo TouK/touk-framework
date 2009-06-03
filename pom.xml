@@ -4,8 +4,15 @@
     <groupId>pl.touk</groupId>
     <artifactId>weblogic-logging</artifactId>
     <packaging>jar</packaging>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>weblogic-logging</name>
+
+    <parent>
+        <groupId>pl.touk</groupId>
+        <artifactId>top</artifactId>
+        <version>1.0.1</version>
+    </parent>
+
     <!--
     <parent>
         <groupId>pl.touk</groupId>
@@ -98,28 +105,4 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-    <scm>
-		<connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</connection>
-		<developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</developerConnection>
-		<url>https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</url>
-	</scm>
-
-    <distributionManagement>
-  <!-- use the following if you're not using a snapshot version. -->
-  <repository>
-    <id>top.release</id>
-    <name>TOP RELEASE</name>
-    <url>http://nexus.touk.pl/nexus/content/groups/public-snapshots</url>
-  </repository>
-  <!-- use the following if you ARE using a snapshot version. -->
-  <!--
-  <snapshotRepository>
-    <id>repo</id>
-    <name>Repository Name</name>
-    <url>scp://host/path/to/repo</url>
-  </snapshotRepository>
-  -->
-</distributionManagement>
-
 </project>
