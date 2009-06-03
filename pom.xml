@@ -107,8 +107,8 @@
 	</repositories>
 
   <scm>
-    <connection>scm:svn:https://top.touk.pl/svn/top/weblogic-logging/tags/weblogic-logging-1.0</connection>
-    <developerConnection>scm:svn:https://top.touk.pl/svn/top/weblogic-logging/tags/weblogic-logging-1.0</developerConnection>
-    <url>https://top.touk.pl/svn/top/weblogic-logging/tags/weblogic-logging-1.0</url>
+    <connection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</connection>
+    <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</developerConnection>
+    <url>https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.0</url>
   </scm>
 </project>
