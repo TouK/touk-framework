@@ -12,7 +12,6 @@ import javax.xml.parsers.DocumentBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
-import weblogic.logging.log4j.Log4jLoggingHelper;
 
 import org.apache.log4j.xml.DOMConfigurator;
 import org.w3c.dom.Document;
@@ -72,7 +71,7 @@ public class WebLogicLoggingConfiguration implements ServletContextListener{
 
     public void configureLog4JLogging() {
         try {
-            Logger logger = Log4jLoggingHelper.getLog4jServerLogger();
+            Logger logger = weblogic.logging.log4j.Log4jLoggingHelper.getLog4jServerLogger();
             
             String configPath = context.getInitParameter("Log4JDOMConfiguation");
 
@@ -135,6 +134,9 @@ public class WebLogicLoggingConfiguration implements ServletContextListener{
             DOMConfigurator.configure(document.getDocumentElement());
 
         } catch(Exception x) {
+            x.printStackTrace(System.out);
+        } catch(NoClassDefFoundError x) {
+            //not running with weblogic classloader
             x.printStackTrace(System.out);
         }
     }
