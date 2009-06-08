@@ -4,7 +4,7 @@
     <groupId>pl.touk</groupId>
     <artifactId>weblogic-logging</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>weblogic-logging</name>
 
     <parent>
@@ -107,8 +107,8 @@
 	</repositories>
 
   <scm>
-    <connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</connection>
-    <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</developerConnection>
-    <url>https://top.touk.pl/svn/toukframework/trunk/weblogic-logging</url>
+    <connection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.1</connection>
+    <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.1</developerConnection>
+    <url>https://top.touk.pl/svn/toukframework/tags/weblogic-logging-1.1</url>
   </scm>
 </project>
