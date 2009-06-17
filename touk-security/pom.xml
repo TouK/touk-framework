@@ -2,13 +2,13 @@
     <parent>
         <artifactId>touk-framework</artifactId>
         <groupId>pl.touk</groupId>
-        <version>1.0.8-SNAPSHOT</version>
+        <version>1.0.8</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.touk</groupId>
     <artifactId>touk-security</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.8</version>
     <name>touk-security</name>
     <dependencies>
         <dependency>
