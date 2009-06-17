@@ -1,0 +1,3 @@
+=============== 17.06.2009 =================
+- Logowanie operacji wejscia do metody wykorzystuje ReflectionToStringBuilder.
+
