@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
@@ -44,29 +45,78 @@ public class LogAspect {
         Log log = getLogGetter().getLog(joinPoint);
 
         if (log.isInfoEnabled()) {
-            log.info("entering: " + joinPoint.getSignature().getName());
+        	
+    		StringBuilder sb = new StringBuilder();
+			
+			sb.append("entering  ---------------------\n");
+			sb.append("  method: ").append(joinPoint.getSignature().getName()).append("\n");
+			sb.append("      at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
 
             String argStringValue = "";
             for (Object arg : joinPoint.getArgs()) {
                 // TODO: dekompozycja do obiektow, parametr adnotacji powinien to definiować.
                 if (arg == null) {
-
                     argStringValue = "NULL";
                 } else if (arg instanceof Collection) {
-
                     argStringValue = buildStringValue((Collection) arg);
-
                 } else {
                     argStringValue = buildStringValue(arg);
                 }
 
-                log.info("   w/arg: " + argStringValue);
+                sb.append("   w/arg: ").append(argStringValue).append("\n");
             }
-            log.info("      at: " + joinPoint.getSourceLocation().getWithinType());
+            
+            sb.append("         ---------------------");
+			log.info(sb.toString());
         }
 
     }
 
+    /**
+     * Logs exit from annotated method.
+     * @param joinPoint JoinPoint automatically filled by aspectj
+     */
+	@After(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)")
+	public void logMethodExitInfo(JoinPoint joinPoint) {
+		Log log = getLogGetter().getLog(joinPoint);
+
+		if (log.isInfoEnabled()) {
+			
+			StringBuilder sb = new StringBuilder();
+			
+			sb.append("leaving  ---------------------\n");
+			sb.append(" method: ").append(joinPoint.getSignature().getName()).append("\n");
+			sb.append("     at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+			sb.append("  value: ").append("TODO").append("\n");
+			sb.append("         ---------------------");
+			
+			log.info(sb.toString());
+		}
+
+	}
+
+    /**
+     * Logs method exception.
+     * @param joinPoint JoinPoint automatically filled by aspectj
+     */
+	@AfterThrowing(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExceptionError)", throwing = "throwable")
+	public void logMethodExceptionError(JoinPoint joinPoint, Throwable throwable) {
+		Log log = getLogGetter().getLog(joinPoint);
+
+		if (log.isErrorEnabled()) {
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("exception  ---------------------\n");
+			sb.append("   method: ").append(joinPoint.getSignature().getName()).append("\n");
+			sb.append("       at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+			sb.append("  message: ").append(throwable.getMessage()).append("\n");
+			sb.append("           ---------------------");
+			
+			log.error(sb.toString(), throwable);
+		}
+
+	}
+	
     protected String buildStringValue(Object arg) {
         return new ReflectionToStringBuilder(arg, ToStringStyle.MULTI_LINE_STYLE).toString();
     }
@@ -81,23 +131,6 @@ public class LogAspect {
 
         argStringValue += " ] \n";
         return argStringValue;
-    }
-
-    /**
-     * Logs exit from annotated method.
-     *
-     * @param joinPoint JoinPoint automatically filled by aspectj
-     */
-    @After(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)")
-    public void logMethodExitInfo(JoinPoint joinPoint) {
-        Log log = getLogGetter().getLog(joinPoint);
-
-        if (log.isInfoEnabled()) {
-            log.info("leaving: " + joinPoint.getSignature().getName());
-            //TODO log return value
-            log.info("      at: " + joinPoint.getSourceLocation().getWithinType());
-        }
-
     }
 
     //setters and getters
