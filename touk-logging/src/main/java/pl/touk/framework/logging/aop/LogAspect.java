@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
+import pl.touk.framework.logging.logGetters.SignatureDeclaringTypeLogGetter;
 import pl.touk.security.context.SecurityContextInterface;
 
 import java.util.Collection;
@@ -30,7 +31,9 @@ import java.util.Collection;
 public class LogAspect {
 
     protected SecurityContextInterface securityContext;
-    protected PointcutLogGetterInterface logGetter;
+    
+    //Default implementation, useful when LogAspect is not instantiated in Spring
+    protected PointcutLogGetterInterface logGetter = new SignatureDeclaringTypeLogGetter();
 
     public LogAspect() {
     }

@@ -12,7 +12,7 @@ import org.aspectj.lang.JoinPoint;
  * LogGetter that returns a Log object for an advised method.
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
-public class SingatureDeclaringTypeLogGetter implements PointcutLogGetterInterface {
+public class SignatureDeclaringTypeLogGetter implements PointcutLogGetterInterface {
 
     /**
      * Gets a Log for the category created from advised method class full name (with package)
