@@ -10,6 +10,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -79,8 +80,8 @@ public class LogAspect {
      * Logs exit from annotated method.
      * @param joinPoint JoinPoint automatically filled by aspectj
      */
-	@After(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)")
-	public void logMethodExitInfo(JoinPoint joinPoint) {
+	@AfterReturning(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)", returning = "retValue")
+	public void logMethodExitInfo(JoinPoint joinPoint, Object retValue) {
 		Log log = getLogGetter().getLog(joinPoint);
 
 		if (log.isInfoEnabled()) {
@@ -90,7 +91,7 @@ public class LogAspect {
 			sb.append("leaving  ---------------------\n");
 			sb.append(" method: ").append(joinPoint.getSignature().getName()).append("\n");
 			sb.append("     at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
-			sb.append("  value: ").append("TODO").append("\n");
+			sb.append("  value: ").append(retValue).append("\n");
 			sb.append("         ---------------------");
 			
 			log.info(sb.toString());
