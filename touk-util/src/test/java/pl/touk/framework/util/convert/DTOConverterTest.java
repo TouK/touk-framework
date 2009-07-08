@@ -1,5 +1,5 @@
 /*
- * Copyright (c) (2005 - )2009 TouK sp. z o.o. s.k.a.
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
 
@@ -48,7 +48,8 @@ public class DTOConverterTest {
     public void testConvertWithNullSource() {
         DTOConverter dtoConverter = new DTODozerConverter(new DozerBeanMapper());
 
-        DummyClass dummyClass = dtoConverter.convert(null, new DummyClass());
+        DummyClass dummyClass = new DummyClass();
+        dummyClass = dtoConverter.convert(null, dummyClass);
 
         Assert.assertNull(dummyClass);
     }

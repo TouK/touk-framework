@@ -17,19 +17,17 @@ public interface DTOConverter {
      *
      * @return instance of destinationClass, mapped with source object properties.
      */
-
     public <FROM, TO> TO convert(FROM sourceObject, java.lang.Class<TO> destinationClass);
 
     /**
      * Converts domain objects collection into a collection of desired DTO objects.
      *
-     * @param sourceObjects - domain class collection
+     * @param sourceObjectsCollection - collection of objects
      * @param destinationClass - desired class name, instances of which will be in the returning collection
      *
      * @return a collection of DTO objects
      */
-
-    public <FROM extends Collection, TO> List<TO> convert(FROM sourceObjects, java.lang.Class<TO> destinationClass);
+    public <FROM extends Collection<?>, TO> List<TO> convert(FROM sourceObjectsCollection, java.lang.Class<TO> destinationClass);
 
     /**
      * Maps source object into destination object, without creating new instance
@@ -39,7 +37,6 @@ public interface DTOConverter {
      *
      * @return destinationObject, mapped with source objects properties.
      */
-
     public <FROM, TO> TO convert(FROM sourceObject, TO destinationObject);
 
 }

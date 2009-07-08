@@ -1,18 +1,19 @@
 /*
- * Copyright (c) (2005 - )2009 TouK sp. z o.o. s.k.a.
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
 
 package pl.touk.framework.util.convert;
 
 import java.util.List;
-/*
- * TODO: ADD SHORT DESCRIPTION 
+
+/**
+ * TODO jkr ADD SHORT DESCRIPTION 
  *
  * @author <a href="mailto:jkr@touk.pl">Jakub Kurlenda</a>
  */
-
 public class DummyClass {
+
     public String xxx;
     public boolean yyy;
     public int zzz;

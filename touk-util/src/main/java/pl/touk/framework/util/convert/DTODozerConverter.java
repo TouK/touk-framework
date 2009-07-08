@@ -1,5 +1,5 @@
 /*
- * Copyright (c) (2005 - )2009 TouK sp. z o.o. s.k.a.
+ * Copyright (C) 2009 TouK sp. z o.o. s.k.a.
  * All rights reserved
  */
 
@@ -15,15 +15,15 @@ import java.util.ArrayList;
 /**
  * @author <a href="mailto:jkr@touk.pl">Jakub Kurlenda</a>
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik </a>
- * @author <a href="mailto:jnb@touk.pl">Ula Trzaskowska </a>
- * 
+ * @author <a href="mailto:utr@touk.pl">Ula Trzaskowska </a>
  */
-
 public class DTODozerConverter implements DTOConverter {
+
     private Mapper beanMapper = new DozerBeanMapper();
     
     /**
      * Constructor for DTOConverter, setting beanMapper.
+     *
      * @param beanMapper Dozer bean mapper to set
      */
     public DTODozerConverter(Mapper beanMapper) {
@@ -38,7 +38,6 @@ public class DTODozerConverter implements DTOConverter {
      *
      * @return instance of destinationClass, mapped with source object properties.
      */
-
     public <FROM, TO> TO convert(FROM sourceObject, java.lang.Class<TO> destinationClass) {
         if(sourceObject == null) {
             return null;
@@ -52,18 +51,16 @@ public class DTODozerConverter implements DTOConverter {
      *
      * @param sourceObjects - domain class collection
      * @param destinationClass - desired class name, instances of which will be in the returning collection
-     *
      * @return a collection of DTO objects
      */
-
     @SuppressWarnings("unchecked")
-    public <FROM extends Collection, TO> List<TO> convert(FROM sourceObjects, java.lang.Class<TO> destinationClass) {
-        if(sourceObjects == null) {
+    public <FROM extends Collection<?>, TO> List<TO> convert(FROM sourceObjectsCollection, java.lang.Class<TO> destinationClass) {
+        if(sourceObjectsCollection == null) {
             return null;
         } else {
             List<TO> returnedList = new ArrayList<TO>();
 
-            for (Object sourceObject : sourceObjects) {
+            for (Object sourceObject : sourceObjectsCollection) {
                 TO destinationDTO = beanMapper.map(sourceObject, destinationClass);
                 returnedList.add(destinationDTO);
             }
@@ -73,23 +70,25 @@ public class DTODozerConverter implements DTOConverter {
     }
 
     /**
-     * Maps source object into destination object, without creating new instance
+     * Maps source object into destination object, without creating new instance.
      *
      * @param sourceObject
      * @param destinationObject
-     *
-     * @return destinationObject, mapped with source objects properties.
      */
-
     public <FROM, TO> TO convert(FROM sourceObject, TO destinationObject) {
-        if(sourceObject == null) {
+        if (sourceObject == null) {
             return null;
         } else {
-            beanMapper.map(sourceObject, destinationObject);
-            return destinationObject;
+        	beanMapper.map(sourceObject, destinationObject);
+        	return destinationObject;
         }
     }
 
+    /**
+     * Sets {@link DozerBeanMapper}.
+     *
+     * @param beanMapper
+     */
     public void setBeanMapper(Mapper beanMapper) {
         this.beanMapper = beanMapper;
     }
