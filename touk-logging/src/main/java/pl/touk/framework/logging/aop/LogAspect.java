@@ -8,6 +8,7 @@ package pl.touk.framework.logging.aop;
 import org.apache.commons.logging.Log;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -122,6 +123,12 @@ public class LogAspect {
 	}
 	
     protected String buildStringValue(Object arg) {
+        String packageName = arg.getClass().getPackage().getName();
+
+        if ("java.lang".equals(packageName) || "java.math".equals(packageName)) {
+            return arg.getClass().getName() + ": " + arg.toString();
+        }
+        
         return new ReflectionToStringBuilder(arg, ToStringStyle.MULTI_LINE_STYLE).toString();
     }
 
