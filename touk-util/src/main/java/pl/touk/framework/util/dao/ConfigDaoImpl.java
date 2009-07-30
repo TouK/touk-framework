@@ -9,9 +9,9 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
- * Configuration manager.
+ * Configuration dao implementation.
  *
- * @author <a href="mailto:mlp@touk.pl">Mateusz LipczyÅ„ski</a>
+ * @author <a href="mailto:mlp@touk.pl">Mateusz Lipczyñski</a>
  */
 @Repository
 public class ConfigDaoImpl extends JdbcDaoSupport implements ConfigDao {
@@ -20,7 +20,7 @@ public class ConfigDaoImpl extends JdbcDaoSupport implements ConfigDao {
      * {@inheritDoc}
      */
     public void setProperty(String key, String value) {
-        this.getJdbcTemplate().update("update configuration set value = ? where key = ?", new Object[]{key, value});
+        this.getJdbcTemplate().update("update configuration set value = ? where key = ?", new Object[]{value, key});
     }
 
     /**
