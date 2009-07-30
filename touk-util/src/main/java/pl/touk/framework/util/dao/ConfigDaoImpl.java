@@ -16,10 +16,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ConfigDaoImpl extends JdbcDaoSupport implements ConfigDao {
 
+    /**
+     * {@inheritDoc}
+     */
     public void setProperty(String key, String value) {
         this.getJdbcTemplate().update("update configuration set value = ? where key = ?", new Object[]{key, value});
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String getProperty(String key) {
         String value = (String) this.getJdbcTemplate().queryForObject("select value from configuration where key = ?", new Object[]{key}, String.class);
         return value;
