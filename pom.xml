@@ -1,161 +1,149 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>pom</packaging>
-	<groupId>pl.touk</groupId>
-	<artifactId>touk-framework</artifactId>
-	<name>TouK Open Framework</name>
-	<description>TouK Open Framework</description>
-	<url>http://top.touk.pl</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <groupId>pl.touk</groupId>
+    <artifactId>touk-framework</artifactId>
+    <name>TouK Open Framework</name>
+    <description>TouK Open Framework</description>
+    <url>http://top.touk.pl</url>
 
-	<version>1.0.17-SNAPSHOT</version>
+    <version>1.0.17-SNAPSHOT</version>
 
-	<parent>
-		<groupId>pl.touk</groupId>
-		<artifactId>top</artifactId>
-		<version>1.0.1</version>
-	</parent>
+    <parent>
+        <groupId>pl.touk</groupId>
+        <artifactId>top</artifactId>
+        <version>1.0.1</version>
+    </parent>
 
-	<repositories>
-		<repository>
-			<id>java.net</id>
-			<name>Java.net repo</name>
-			<url>http://download.java.net/maven/2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>top.release</id>
-			<name>TouK Open source repository with release</name>
-			<url>http://top.touk.pl/maven2/release</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>top.snapshot</id>
-			<name>TouK Open source repository with snapshots</name>
-			<url>http://top.touk.pl/maven2/snapshot</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>java.net</id>
+            <name>Java.net repo</name>
+            <url>http://download.java.net/maven/2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>top.release</id>
+            <name>TouK Open source repository with release</name>
+            <url>http://top.touk.pl/maven2/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>top.snapshot</id>
+            <name>TouK Open source repository with snapshots</name>
+            <url>http://top.touk.pl/maven2/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-	<scm>
-		<connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</connection>
-		<developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</developerConnection>
-		<url>https://top.touk.pl/svn/toukframework/trunk</url>
-	</scm>
+    <scm>
+        <connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</connection>
+        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</developerConnection>
+        <url>https://top.touk.pl/svn/toukframework/trunk</url>
+    </scm>
 
-	<modules>
-		<module>touk-logging</module>
-		<module>touk-util</module>
-		<module>touk-security</module>
-	</modules>
+    <modules>
+        <module>touk-aspects</module>
+        <module>touk-logging</module>
+        <module>touk-util</module>
+        <module>touk-security</module>
+    </modules>
 
-	<profiles>
-	</profiles>
+    <profiles>
+    </profiles>
 
-	<properties>
-		<spring.version>2.5.6</spring.version>
-	</properties>
-
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-				</configuration>
-			</plugin>
-		</plugins>
-
-		<pluginManagement>
-		</pluginManagement>
-	</build>
+    <properties>
+        <spring.version>2.5.6</spring.version>
+    </properties>
 
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-core</artifactId>
-				<version>2.0.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>1.6.2</version>
-			</dependency>
-			<dependency>
-				<groupId>cglib</groupId>
-				<artifactId>cglib</artifactId>
-				<version>2.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-collections</groupId>
-				<artifactId>commons-collections</artifactId>
-				<version>3.2.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-beanutils</groupId>
-				<artifactId>commons-beanutils</artifactId>
-				<version>1.8.0</version>
-			</dependency>
-			<!--
-				<dependency> <groupId>org.springframework</groupId>
-				<artifactId>spring-aop</artifactId>
-				<version>${spring.version}</version> </dependency> <dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId> <version>1.6.1</version>
-				</dependency>
-			-->
-			<!--
-				<dependency> <groupId>pl.touk</groupId>
-				<artifactId>wonderful-security-lib</artifactId>
-				<version>1.0.1</version> </dependency>
-			-->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
 
-			<!-- testing -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jmock</groupId>
-				<artifactId>jmock</artifactId>
-				<version>2.5.1</version>
-			</dependency>
+        <pluginManagement>
+        </pluginManagement>
+    </build>
 
-		</dependencies>
-	</dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>2.0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.6.5</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.8.0</version>
+            </dependency>
+
+            <!-- testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jmock</groupId>
+                <artifactId>jmock</artifactId>
+                <version>2.5.1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>
