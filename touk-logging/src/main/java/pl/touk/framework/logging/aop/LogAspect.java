@@ -112,8 +112,28 @@ public class LogAspect extends AnnotationAwareAspect {
 	        log(level, log, sb.toString());
         }
         
+        Object result = null;
+        
         //invocation
-        Object result = joinPoint.proceed();
+        try {
+        	
+        	result = joinPoint.proceed();
+        	
+        } catch (Throwable throwable) {
+        	
+        	if (log.isErrorEnabled()) {
+    			
+    			sb = new StringBuilder();
+    			sb.append("exception  ---------------------\n");
+    			sb.append("   method: ").append(joinPoint.getSignature().getName()).append("\n");
+    			sb.append("       at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+    			sb.append("  message: ").append(throwable.getMessage()).append("\n");
+    			sb.append("           ---------------------");
+    			
+    			log.error(sb.toString(), throwable);
+    		}        	
+        	throw throwable;
+        }
         
         //logging leaving
         if (isLevelEnabled(log, level)) {
@@ -121,7 +141,7 @@ public class LogAspect extends AnnotationAwareAspect {
 			sb.append("leaving  ---------------------\n");
 			sb.append(" method: ").append(joinPoint.getSignature().getName()).append("\n");
 			sb.append("     at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
-			sb.append("  value: ").append(result.toString()).append("\n");
+			sb.append("  value: ").append(result).append("\n");
 			sb.append("         ---------------------");
 			
 			log(level, log, sb.toString());
