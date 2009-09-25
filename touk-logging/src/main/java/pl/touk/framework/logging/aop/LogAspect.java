@@ -5,22 +5,25 @@
 
 package pl.touk.framework.logging.aop;
 
-import org.apache.commons.logging.Log;
+import java.lang.annotation.Annotation;
+import java.util.Collection;
+
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.logging.Log;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
+import pl.touk.framework.aop.AnnotationAwareAspect;
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
 import pl.touk.framework.logging.logGetters.SignatureDeclaringTypeLogGetter;
-import pl.touk.security.context.SecurityContextInterface;
 
-import java.util.Collection;
+import pl.touk.security.context.SecurityContextInterface;
 
 /**
  * Aspect (in AOP sense) responsible for logging.
@@ -30,7 +33,7 @@ import java.util.Collection;
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 @Aspect
-public class LogAspect {
+public class LogAspect extends AnnotationAwareAspect {
 
     protected SecurityContextInterface securityContext;
     
@@ -76,8 +79,98 @@ public class LogAspect {
         }
 
     }
+    
+    @Around(value = "@annotation(pl.touk.framework.logging.aop.LogInvocation)")
+    public Object logMethodInvocation(ProceedingJoinPoint joinPoint) throws Throwable {
+        
+    	Annotation annotation = getMethodAnnotation(joinPoint, pl.touk.framework.logging.aop.LogInvocation.class);
+        LogLevel level = ((pl.touk.framework.logging.aop.LogInvocation) annotation).value();
+        
+        Log log = getLogGetter().getLog(joinPoint);
+        StringBuilder sb = new StringBuilder();
+        
+        //logging entry
+        if (isLevelEnabled(log, level)) {
+			sb.append("entering  ---------------------\n");
+			sb.append("  method: ").append(joinPoint.getSignature().getName()).append("\n");
+			sb.append("      at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+	
+	        String argStringValue = "";
+	        for (Object arg : joinPoint.getArgs()) {
+	            if (arg == null) {
+	                argStringValue = "NULL";
+	            } else if (arg instanceof Collection) {
+	                argStringValue = buildStringValue((Collection) arg);
+	            } else {
+	                argStringValue = buildStringValue(arg);
+	            }
+	
+	            sb.append("   w/arg: ").append(argStringValue).append("\n");
+	        }        
+	        sb.append("         ---------------------");
+	        
+	        log(level, log, sb.toString());
+        }
+        
+        //invocation
+        Object result = joinPoint.proceed();
+        
+        //logging leaving
+        if (isLevelEnabled(log, level)) {
+	        sb = new StringBuilder();
+			sb.append("leaving  ---------------------\n");
+			sb.append(" method: ").append(joinPoint.getSignature().getName()).append("\n");
+			sb.append("     at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+			sb.append("  value: ").append(result.toString()).append("\n");
+			sb.append("         ---------------------");
+			
+			log(level, log, sb.toString());
+        }
+        
+        return result;
+    }
 
-    /**
+    private boolean isLevelEnabled(Log log, LogLevel level) {
+    	switch (level) {
+			case TRACE:
+				return log.isTraceEnabled();
+			case DEBUG:
+				return log.isDebugEnabled();
+			case INFO:
+				return log.isInfoEnabled();
+			case WARNING:
+				return log.isInfoEnabled();
+			case ERROR:
+				return log.isErrorEnabled();
+			case FATAL:
+				return log.isFatalEnabled();
+		    default:
+		    	return false;
+		}    
+	}
+
+	private void log(LogLevel level, Log log, String string) {
+        
+    	switch (level) {
+    		case TRACE:
+    			log.trace(string);
+    			break;
+    		case DEBUG:
+    			log.debug(string);
+    			break;
+    		case INFO:
+    			log.info(string);
+    			break;
+    		case WARNING:
+    			log.warn(string);
+    			break;
+    		case ERROR:
+    			log.error(string);
+    			break;    			
+    	}    
+	}
+
+	/**
      * Logs exit from annotated method.
      * @param joinPoint JoinPoint automatically filled by aspectj
      */

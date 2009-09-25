@@ -13,6 +13,7 @@ import java.lang.annotation.ElementType;
  * @author Witek Wolejszo
  */
 @Target(ElementType.METHOD)
+@Deprecated
 public @interface LogMethodEntranceInfo {
 
 }
