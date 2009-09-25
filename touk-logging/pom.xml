@@ -2,13 +2,13 @@
     <parent>
         <artifactId>touk-framework</artifactId>
         <groupId>pl.touk</groupId>
-        <version>1.0.17-SNAPSHOT</version>
+        <version>1.0.17</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.touk</groupId>
     <artifactId>touk-logging</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.17-SNAPSHOT</version>
+    <version>1.0.17</version>
     <name>touk-logging</name>
     <build>
         <plugins>
@@ -41,11 +41,6 @@
         <dependency>
             <groupId>pl.touk</groupId>
             <artifactId>touk-util</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.touk</groupId>
-            <artifactId>touk-aspects</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
