@@ -5,12 +5,12 @@
 
 package pl.touk.framework.logging.aop;
 
-import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -19,7 +19,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
-import pl.touk.framework.aop.AnnotationAwareAspect;
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
 import pl.touk.framework.logging.logGetters.SignatureDeclaringTypeLogGetter;
 
@@ -33,7 +32,9 @@ import pl.touk.security.context.SecurityContextInterface;
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 @Aspect
-public class LogAspect extends AnnotationAwareAspect {
+public class LogAspect {
+	
+	private final Log log = LogFactory.getLog(LogAspect.class);
 
     protected SecurityContextInterface securityContext;
     
@@ -80,11 +81,10 @@ public class LogAspect extends AnnotationAwareAspect {
 
     }
     
-    @Around(value = "@annotation(pl.touk.framework.logging.aop.LogInvocation)")
-    public Object logMethodInvocation(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around(value = "@annotation(logInvocation)")
+    public Object logMethodInvocation(ProceedingJoinPoint joinPoint, LogInvocation logInvocation) throws Throwable {
         
-    	Annotation annotation = getMethodAnnotation(joinPoint, pl.touk.framework.logging.aop.LogInvocation.class);
-        LogLevel level = ((pl.touk.framework.logging.aop.LogInvocation) annotation).value();
+        LogLevel level = logInvocation.value();
         
         Log log = getLogGetter().getLog(joinPoint);
         StringBuilder sb = new StringBuilder();
@@ -112,8 +112,28 @@ public class LogAspect extends AnnotationAwareAspect {
 	        log(level, log, sb.toString());
         }
         
+        Object result = null;
+        
         //invocation
-        Object result = joinPoint.proceed();
+        try {
+        	
+        	result = joinPoint.proceed();
+        	
+        } catch (Throwable throwable) {
+        	
+        	if (log.isErrorEnabled()) {
+    			
+    			sb = new StringBuilder();
+    			sb.append("exception  ---------------------\n");
+    			sb.append("   method: ").append(joinPoint.getSignature().getName()).append("\n");
+    			sb.append("       at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
+    			sb.append("  message: ").append(throwable.getMessage()).append("\n");
+    			sb.append("           ---------------------");
+    			
+    			log.error(sb.toString(), throwable);
+    		}        	
+        	throw throwable;
+        }
         
         //logging leaving
         if (isLevelEnabled(log, level)) {
@@ -121,7 +141,7 @@ public class LogAspect extends AnnotationAwareAspect {
 			sb.append("leaving  ---------------------\n");
 			sb.append(" method: ").append(joinPoint.getSignature().getName()).append("\n");
 			sb.append("     at: ").append(joinPoint.getSourceLocation().getWithinType()).append("\n");
-			sb.append("  value: ").append(result.toString()).append("\n");
+			sb.append("  value: ").append(result).append("\n");
 			sb.append("         ---------------------");
 			
 			log(level, log, sb.toString());
