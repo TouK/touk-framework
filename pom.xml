@@ -7,7 +7,7 @@
     <description>TouK Open Framework</description>
     <url>http://top.touk.pl</url>
 
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.1</version>
 
     <parent>
         <groupId>pl.touk</groupId>
@@ -49,15 +49,16 @@
     </repositories>
 
     <scm>
-        <connection>scm:svn:http://top.touk.pl/svn/toukframework/trunk</connection>
-        <developerConnection>scm:svn:http://top.touk.pl/svn/toukframework/trunk</developerConnection>
-        <url>http://top.touk.pl/svn/toukframework/trunk</url>
+        <connection>scm:svn:http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.1</connection>
+        <developerConnection>scm:svn:http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.1</developerConnection>
+        <url>http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.1</url>
     </scm>
 
     <modules>
         <module>touk-logging</module>
         <module>touk-util</module>
         <module>touk-security</module>
+        <module>touk-delay</module>
     </modules>
 
     <profiles>
@@ -140,6 +141,11 @@
                 <artifactId>jmock</artifactId>
                 <version>2.5.1</version>
             </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.8.4</version>
+            </dependency>            
 
         </dependencies>
     </dependencyManagement>
