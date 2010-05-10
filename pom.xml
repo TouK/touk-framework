@@ -7,14 +7,14 @@
     <description>TouK Open Framework</description>
     <url>http://top.touk.pl</url>
 
-    <version>1.0.19-SNAPSHOT</version>
+    <version>1.1.0</version>
 
     <parent>
         <groupId>pl.touk</groupId>
         <artifactId>top</artifactId>
         <version>1.0.1</version>
     </parent>
-
+ 
     <repositories>
         <repository>
             <id>java.net</id>
@@ -49,9 +49,9 @@
     </repositories>
 
     <scm>
-        <connection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</connection>
-        <developerConnection>scm:svn:https://top.touk.pl/svn/toukframework/trunk</developerConnection>
-        <url>https://top.touk.pl/svn/toukframework/trunk</url>
+        <connection>scm:svn:http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.0</connection>
+        <developerConnection>scm:svn:http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.0</developerConnection>
+        <url>http://top.touk.pl/svn/toukframework/tags/touk-framework-1.1.0</url>
     </scm>
 
     <modules>
@@ -64,9 +64,9 @@
     </profiles>
 
     <properties>
-        <spring.version>2.5.6</spring.version>
+        <spring.version>3.0.2.RELEASE</spring.version>
+        <spring.security.version>3.0.2.RELEASE</spring.security.version>
     </properties>
-
 
     <build>
         <plugins>
@@ -96,7 +96,7 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
-                <version>2.0.4</version>
+                <version>${spring.security.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.aspectj</groupId>
