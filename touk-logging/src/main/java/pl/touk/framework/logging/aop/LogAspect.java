@@ -34,7 +34,7 @@ import pl.touk.security.context.SecurityContextInterface;
 @Aspect
 public class LogAspect {
 	
-	private final Log log = LogFactory.getLog(LogAspect.class);
+	//private final Log log = LogFactory.getLog(LogAspect.class);
 
     protected SecurityContextInterface securityContext;
     
@@ -51,7 +51,7 @@ public class LogAspect {
      */
     @Before(value = "@annotation(pl.touk.framework.logging.aop.LogMethodEntranceInfo)")
     public void logMethodEntranceInfo(JoinPoint joinPoint) {
-        Log log = getLogGetter().getLog(joinPoint);
+        Log log = this.logGetter.getLog(joinPoint);
 
         if (log.isInfoEnabled()) {
         	
@@ -86,7 +86,7 @@ public class LogAspect {
         
         LogLevel level = logInvocation.value();
         
-        Log log = getLogGetter().getLog(joinPoint);
+        Log log = this.logGetter.getLog(joinPoint);
         StringBuilder sb = new StringBuilder();
         
         //logging entry
@@ -196,7 +196,7 @@ public class LogAspect {
      */
 	@AfterReturning(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExitInfo)", returning = "retValue")
 	public void logMethodExitInfo(JoinPoint joinPoint, Object retValue) {
-		Log log = getLogGetter().getLog(joinPoint);
+		Log log = this.logGetter.getLog(joinPoint);
 
 		if (log.isInfoEnabled()) {
 			
@@ -219,7 +219,7 @@ public class LogAspect {
      */
 	@AfterThrowing(value = "@annotation(pl.touk.framework.logging.aop.LogMethodExceptionError)", throwing = "throwable")
 	public void logMethodExceptionError(JoinPoint joinPoint, Throwable throwable) {
-		Log log = getLogGetter().getLog(joinPoint);
+		Log log = this.logGetter.getLog(joinPoint);
 
 		if (log.isErrorEnabled()) {
 			
@@ -259,16 +259,8 @@ public class LogAspect {
 
     //setters and getters
 
-    protected SecurityContextInterface getSecurityContext() {
-        return securityContext;
-    }
-
     public void setSecurityContext(SecurityContextInterface securityContext) {
         this.securityContext = securityContext;
-    }
-
-    protected PointcutLogGetterInterface getLogGetter() {
-        return logGetter;
     }
 
     public void setLogGetter(PointcutLogGetterInterface logGetter) {

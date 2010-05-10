@@ -5,15 +5,19 @@
 
 package pl.touk.security.context;
 
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.context.SecurityContextHolder;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 public class SpringSecurityContext implements SecurityContextInterface {
 
-	public UserDetails getLoggedInUser() {
+	private UserDetails getLoggedInUser() {
 
 		// call outside of operating security context
 		// not exactly bad, but possible during hibernate bootstrap.
@@ -50,4 +54,17 @@ public class SpringSecurityContext implements SecurityContextInterface {
 			return userDetails.getUsername();
 		}
 	}
+
+    public Collection<String> getAuthorities() {
+        UserDetails userDetails = this.getLoggedInUser();
+        Collection<String> authorities = new ArrayList<String>();
+        if (null == userDetails) {
+            return null;
+        } else {
+            for (GrantedAuthority a : userDetails.getAuthorities()) {
+                authorities.add(a.getAuthority());
+            }
+            return authorities;
+        }
+    }
 }

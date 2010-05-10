@@ -2,12 +2,13 @@ package pl.touk.security.context;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.userdetails.User;
-import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.authentication.TestingAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class SpringSecurityContextTest  {
 
@@ -16,16 +17,15 @@ public class SpringSecurityContextTest  {
     //for rationale see http://jira.springframework.org/browse/SEC-1010
     public void testGetLoggedInUser() throws Exception {
 
-//        //setting up environment
-//        GrantedAuthority[] grantedAuthorities = new GrantedAuthority[]{new GrantedAuthorityImpl("ROLE_CUSTOMER")};
-//        UserDetails userDetails = new User("username", "123456", true, false, false, false, grantedAuthorities);
-//        Authentication authentication = new TestingAuthenticationToken(userDetails, "password", grantedAuthorities);
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//
-//        SpringSecurityContext context = new SpringSecurityContext();
-//        UserDetails receivedUserDetails = context.getLoggedInUser();
-//
-//        Assert.assertSame(userDetails, receivedUserDetails);
+        //setting up environment
+        GrantedAuthority[] grantedAuthorities = new GrantedAuthority[]{new GrantedAuthorityImpl("ROLE_CUSTOMER")};
+        UserDetails userDetails = new User("username", "123456", true, false, false, false, grantedAuthorities);
+        Authentication authentication = new TestingAuthenticationToken(userDetails, "password", grantedAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        SpringSecurityContext context = new SpringSecurityContext();
+
+        Assert.assertSame(userDetails.getUsername(), context.getLoggedUserName());
 
     }
 

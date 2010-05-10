@@ -5,22 +5,27 @@
 
 package pl.touk.security.context;
 
-import org.springframework.security.userdetails.UserDetails;
+import java.util.Collection;
+
 
 /**
  * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
+ * 
+ * Changes:
+ * - w wersji 1.0.19 wyrzucono metode z zaleznoscia do Spring: public UserDetails getLoggedInUser();
  */
 public interface SecurityContextInterface {
 
     /**
-     * @return Logged in user
+     * @return
+     * @since 1.1.0
      */
-    public UserDetails getLoggedInUser();
+    Collection<String> getAuthorities();
 
     /**
      * This method is provided so your class do not have to violate "Do not talk to strangers" rule
      * when all it needs is a name of logged user 
      * @return Name of Logged in user
      */
-    public String getLoggedUserName();
+    String getLoggedUserName();
 }
