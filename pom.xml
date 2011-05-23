@@ -26,6 +26,12 @@
         </repository>
     </repositories>
 
+    <scm>
+      <connection>scm:git:ssh://TouK/touk-framework.git</connection>
+      <developerConnection>scm:git:ssh://TouK/touk-framework.git</developerConnection>
+      <url>git://TouK/touk-framework.git</url>
+    </scm>
+
     <modules>
         <module>touk-logging</module>
         <module>touk-config</module>
@@ -145,9 +151,5 @@
     </dependencyManagement>
 
 
-  <scm>
-    <connection>scm:svn:https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</connection>
-    <developerConnection>scm:svn:https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</developerConnection>
-    <url>https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</url>
-  </scm>
+
 </project>
