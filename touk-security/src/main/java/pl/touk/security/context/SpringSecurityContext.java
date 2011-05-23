@@ -5,16 +5,13 @@
 
 package pl.touk.security.context;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-/**
- * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
- */
 public class SpringSecurityContext implements SecurityContextInterface {
 
 	private UserDetails getLoggedInUser() {

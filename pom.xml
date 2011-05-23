@@ -24,49 +24,19 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
-        <repository>
-            <id>top.release</id>
-            <name>TouK Open source repository with release</name>
-            <url>http://top.touk.pl/maven2/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>top.snapshot</id>
-            <name>TouK Open source repository with snapshots</name>
-            <url>http://top.touk.pl/maven2/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
-
-    <scm>
-        <connection>scm:svn:http://top.touk.pl/svn/toukframework/trunk</connection>
-        <developerConnection>scm:svn:http://top.touk.pl/svn/toukframework/trunk</developerConnection>
-        <url>http://top.touk.pl/svn/toukframework/trunk</url>
-    </scm>
 
     <modules>
         <module>touk-logging</module>
-        <module>touk-util</module>
+        <module>touk-config</module>
         <module>touk-security</module>
         <module>touk-delay</module>
+        <module>touk-dozer</module>
     </modules>
 
-    <profiles>
-    </profiles>
-
     <properties>
-        <spring.version>3.0.2.RELEASE</spring.version>
-        <spring.security.version>3.0.2.RELEASE</spring.security.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.security.version>3.0.5.RELEASE</spring.security.version>
     </properties>
 
     <build>
@@ -100,6 +70,11 @@
                 <version>${spring.security.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-openid</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
                 <version>1.6.5</version>
@@ -129,25 +104,50 @@
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.8.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>r09</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>5.0</version>
+            </dependency>
+
 
             <!-- testing -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.4</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.jmock</groupId>
                 <artifactId>jmock</artifactId>
                 <version>2.5.1</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>1.8.4</version>
+                <version>1.8.5</version>
+                <scope>test</scope>
             </dependency>            
 
         </dependencies>
     </dependencyManagement>
 
+
+  <scm>
+    <connection>scm:svn:https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</connection>
+    <developerConnection>scm:svn:https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</developerConnection>
+    <url>https://top.touk.pl/svn/top/touk-framework/tags/touk-framework-1.1.2</url>
+  </scm>
 </project>

@@ -10,8 +10,6 @@ import org.aspectj.lang.JoinPoint;
 
 /**
  * Responsible for getting a Log object from a JoinPoint.
- *
- * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 public interface PointcutLogGetterInterface extends LogGetterInterface {
 

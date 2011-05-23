@@ -9,8 +9,6 @@ import org.apache.commons.logging.Log;
 
 /**
  * Responsible for getting a Log object.
- *
- * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 public interface LogGetterInterface {
 

@@ -5,44 +5,29 @@
 
 package pl.touk.framework.logging.aop;
 
-import java.util.Collection;
-
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-
+import org.aspectj.lang.annotation.*;
 import pl.touk.framework.logging.logGetters.PointcutLogGetterInterface;
 import pl.touk.framework.logging.logGetters.SignatureDeclaringTypeLogGetter;
-
 import pl.touk.security.context.SecurityContextInterface;
+
+import java.util.Collection;
 
 /**
  * Aspect (in AOP sense) responsible for logging.
- * Whenever you want to log anything, use this aspect. Do not use logging (log4j, commons.logging) directly.
  *
  * @author witek wolejszo
- * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 @Aspect
 public class LogAspect {
-	
-	//private final Log log = LogFactory.getLog(LogAspect.class);
-
     protected SecurityContextInterface securityContext;
     
     //Default implementation, useful when LogAspect is not instantiated in Spring
     protected PointcutLogGetterInterface logGetter = new SignatureDeclaringTypeLogGetter();
-
-    public LogAspect() {
-    }
 
     /**
      * Logs entrance to annotated method.
@@ -63,7 +48,6 @@ public class LogAspect {
 
             String argStringValue = "";
             for (Object arg : joinPoint.getArgs()) {
-                // TODO: dekompozycja do obiektow, parametr adnotacji powinien to definiować.
                 if (arg == null) {
                     argStringValue = "NULL";
                 } else if (arg instanceof Collection) {

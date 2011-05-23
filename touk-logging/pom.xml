@@ -40,11 +40,6 @@
     <dependencies>
         <dependency>
             <groupId>pl.touk</groupId>
-            <artifactId>touk-util</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.touk</groupId>
             <artifactId>touk-security</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 
 /**
  * Marks that a method invocation should be logged as a business operation.
- * @author <a href="mailto:jnb@touk.pl">Jakub Nabrdalik</a>.
  */
 @Target(ElementType.METHOD)
 public @interface LogBusinessOperationInfo {
