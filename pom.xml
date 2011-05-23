@@ -7,7 +7,7 @@
     <description>TouK Open Framework</description>
     <url>http://top.touk.pl</url>
 
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
 
     <parent>
         <groupId>pl.touk</groupId>
