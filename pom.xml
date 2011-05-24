@@ -28,7 +28,7 @@
 
     <scm>
         <connection>scm:git://github.com/TouK/touk-framework.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:TouK/touk-framework.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/TouK/touk-framework.git</developerConnection>
         <url>https://github.com/TouK/touk-framework.git</url>
     </scm>
 
