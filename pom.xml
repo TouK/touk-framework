@@ -5,14 +5,14 @@
     <artifactId>touk-framework</artifactId>
     <name>TouK Open Framework</name>
     <description>TouK Open Framework</description>
-    <url>http://top.touk.pl</url>
+    <url>https://github.com/TouK/touk-framework</url>
 
     <version>1.1.4-SNAPSHOT</version>
 
     <parent>
         <groupId>pl.touk</groupId>
-        <artifactId>top</artifactId>
-        <version>1.0.1</version>
+        <artifactId>touk-superpom</artifactId>
+        <version>2.0.4</version>
     </parent>
  
     <repositories>
